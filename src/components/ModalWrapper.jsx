@@ -9,7 +9,8 @@ const style = {
   maxHeight: "80vh",
   overflowX: "hidden",
   p: 2,
-  width: "fit-content",
+  width: "50%",
+  borderRadius: "10px",
 };
 
 function ModalWrapper({ openModal, closeModal, children, ...props }) {
