@@ -26,6 +26,9 @@ export const adminApi = createApi({
     getAllMembers: builder.query({
       query: () => ({ url: ``, method: "GET" }),
     }),
+    getStatistics: builder.query({
+      query: () => ({ url: `stats`, method: "GET" }),
+    }),
     updateMember: builder.mutation({
       query: (id) => ({ url: `update/${id}`, method: "PUT" }),
     }),
@@ -35,6 +38,7 @@ export const adminApi = createApi({
 export const {
   useCreateMemberMutation,
   useDeleteMemberMutation,
+  useGetStatisticsQuery,
   useGetAllMembersQuery,
   useGetSingleMemberQuery,
   useUpdateMemberMutation,
