@@ -2,6 +2,7 @@ import { stringAvatar } from "@lib/util";
 import { HomeRounded, Logout, People } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Menu = (props) => {
@@ -53,6 +54,8 @@ const Menu = (props) => {
 };
 
 const Sidebar = () => {
+  const { user } = useSelector((state) => state.auth);
+
   const navsFooter = [
     {
       href: "javascript:void(0)",
@@ -131,7 +134,7 @@ const Sidebar = () => {
                   <Avatar {...stringAvatar("Alivika tony")} />
                   <div className="flex flex-col items-center">
                     <span className="block text-white text-sm font-semibold">
-                      spyke#@mail.con
+                      {user.name ?? "user"}
                     </span>
                     <a
                       href="javascript:void(0)"
