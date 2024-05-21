@@ -1,19 +1,29 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useLoginUserMutation } from "../../app/services/auth.service";
+import Spinner from "../../components/atoms/Spinner";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
+
+  const [login, { isLoading }] = useLoginUserMutation("auth-login");
+
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-    } catch (error) {}
+      const res = await login(form);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div className="grid h-screen place-items-center bg-gray-100">
-      <form className="max-w-sm mx-auto shadow-md p-5" onSubmit={onSubmit}>
+      <form className="w-1/2 mx-auto shadow-md p-5" onSubmit={onSubmit}>
         <p className="py-2 font-bold text-lg text-center">
           Login to continue managing your <br />
           <span className="text-blue-500">family tree</span>
@@ -54,29 +64,25 @@ export default function Login() {
             required
           />
         </div>
-        <div className="flex items-start mb-5">
-          <div className="flex items-center h-5">
-            <input
-              id="remember"
-              type="checkbox"
-              value=""
-              className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 "
-              required
-            />
-          </div>
-          <label
-            htmlFor="remember"
-            className="ms-2 text-sm font-medium text-gray-900"
-          >
-            Remember me
-          </label>
+
+        <div className="w-full">
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <button
+              type="submit"
+              className="text-white bg-blue-500 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center  "
+            >
+              Submit
+            </button>
+          )}
+          <p className="py-2">
+            Don't have an account?{" "}
+            <Link className="text-blue-500" to="/signup">
+              Register
+            </Link>
+          </p>
         </div>
-        <button
-          type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Submit
-        </button>
       </form>
     </div>
   );
