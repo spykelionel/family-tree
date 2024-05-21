@@ -2,8 +2,9 @@ import { stringAvatar } from "@lib/util";
 import { HomeRounded, Logout, People } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "../../../features/auth/authSlice";
 
 const Menu = (props) => {
   const { children, items } = props;
@@ -55,6 +56,7 @@ const Menu = (props) => {
 
 const Sidebar = () => {
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const navsFooter = [
     {
@@ -134,7 +136,7 @@ const Sidebar = () => {
                   <Avatar {...stringAvatar("Alivika tony")} />
                   <div className="flex flex-col items-center">
                     <span className="block text-white text-sm font-semibold">
-                      {user.name ?? "user"}
+                      {user?.name ?? "user"}
                     </span>
                     <a
                       href="javascript:void(0)"
@@ -145,7 +147,7 @@ const Sidebar = () => {
                   </div>
                   <div className="flex flex-row gap-2 my-2 cursor-pointer hover:text-gray-200">
                     <Logout />
-                    <button>Logout</button>
+                    <button onClick={() => dispatch(logout())}>Logout</button>
                   </div>
                 </div>
               </div>
