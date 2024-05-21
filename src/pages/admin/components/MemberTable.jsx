@@ -34,7 +34,7 @@ function MemberTable() {
   const { data, status, isLoading } = useGetAllMembersQuery("members");
 
   useEffect(() => {
-    console.log(data);
+    data && console.log(data.members);
   }, [status]);
 
   return (
@@ -71,9 +71,10 @@ function MemberTable() {
         </tr>
       </thead>
       <tbody>
-        {crimes.map((crime, idx) => (
-          <MemberRow key={crime.crimeId} idx={idx + 1} {...crime} />
-        ))}
+        {data &&
+          data?.members?.map((member, idx) => (
+            <MemberRow key={member._id} idx={idx + 1} {...member} />
+          ))}
       </tbody>
     </table>
   );
