@@ -4,7 +4,7 @@ import { BASE_URL } from "../../lib/config/config.env";
 export const adminApi = createApi({
   reducerPath: "adminApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${BASE_URL}/admin`,
+    baseUrl: `${BASE_URL}/members`,
     prepareHeaders: (headers, { getState }) => {
       const { token } = getState().auth;
       if (token) {
@@ -14,28 +14,28 @@ export const adminApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    createUser: builder.mutation({
-      query: (body) => ({ body, url: "users", method: "POST" }),
+    createMember: builder.mutation({
+      query: (body) => ({ body, url: "create", method: "POST" }),
     }),
-    deleteUser: builder.mutation({
-      query: (id) => ({ url: `users/${id}`, method: "DELETE" }),
+    deleteMember: builder.mutation({
+      query: (id) => ({ url: `delete/${id}`, method: "DELETE" }),
     }),
-    getSingleUser: builder.query({
-      query: (id) => ({ url: `users/${id}`, method: "GET" }),
+    getSingleMember: builder.query({
+      query: (id) => ({ url: `${id}`, method: "GET" }),
     }),
-    getAllUsers: builder.query({
-      query: () => ({ url: `users`, method: "GET" }),
+    getAllMembers: builder.query({
+      query: () => ({ url: ``, method: "GET" }),
     }),
-    updateUser: builder.mutation({
-      query: (id) => ({ url: `users/${id}`, method: "PUT" }),
+    updateMember: builder.mutation({
+      query: (id) => ({ url: `update/${id}`, method: "PUT" }),
     }),
   }),
 });
 
 export const {
-  useCreateUserMutation,
-  useDeleteUserMutation,
-  useGetAllUsersQuery,
-  useGetSingleUserQuery,
-  useUpdateUserMutation,
+  useCreateMemberMutation,
+  useDeleteMemberMutation,
+  useGetAllMembersQuery,
+  useGetSingleMemberQuery,
+  useUpdateMemberMutation,
 } = adminApi;
