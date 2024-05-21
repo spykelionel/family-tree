@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { baseUrl } from "../../config/env.config";
+import { BASE_URL } from "../../lib/config/config.env";
 
 export const adminApi = createApi({
   reducerPath: "adminApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${baseUrl}/admin`,
+    baseUrl: `${BASE_URL}/admin`,
     prepareHeaders: (headers, { getState }) => {
       const { token } = getState().auth;
       if (token) {

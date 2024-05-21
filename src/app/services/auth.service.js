@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { baseUrl } from "../../config/env.config";
-import { postDelegate } from "../../util/util";
+import { BASE_URL } from "../../lib/config/config.env";
+import { FormWizard } from "../../lib/util/util";
 
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl,
+    baseUrl: `${BASE_URL}/auth`,
     prepareHeaders: (headers, { getState }) => {
       const { token } = getState().auth;
       if (token) {
@@ -19,16 +19,16 @@ export const authApi = createApi({
       query: () => ({ url: "/logout", method: "POST" }),
     }),
     loginUser: builder.mutation({
-      query: (body) => postDelegate("/login", body),
+      query: (body) => FormWizard.post("/login", body),
     }),
     registerUser: builder.mutation({
-      query: (body) => postDelegate("/register", body),
+      query: (body) => FormWizard.post("/register", body),
     }),
     resetPassword: builder.mutation({
-      query: (body) => postDelegate("/reset-password", body),
+      query: (body) => FormWizard.post("/reset-password", body),
     }),
     forgotPassword: builder.mutation({
-      query: (body) => postDelegate("/forgot-password", body),
+      query: (body) => FormWizard.post("/forgot-password", body),
     }),
   }),
 });
