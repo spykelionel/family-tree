@@ -11,7 +11,7 @@ export default function Signup() {
     repeatPassword: "",
   });
 
-  const [login, { isLoading }] = useRegisterUserMutation("auth-register");
+  const [register, { isLoading }] = useRegisterUserMutation("auth-register");
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -19,7 +19,7 @@ export default function Signup() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await login(form);
+      const res = await register({ ...form, repeatPassword: undefined });
       console.log(res);
     } catch (error) {
       console.log(error);
