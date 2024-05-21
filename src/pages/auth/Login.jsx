@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../../app/services/auth.service";
 import Spinner from "../../components/atoms/Spinner";
+import { setCredentials } from "../../features/auth/authSlice";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [login, { isLoading }] = useLoginUserMutation("auth-login");
 
@@ -15,7 +19,16 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await login(form);
-      console.log(res);
+      const { name, email, token } = res.data;
+      dispatch(
+        setCredentials({
+          user: { name, email },
+          token,
+        })
+      );
+      if (res.data) {
+        navigate("/admin");
+      }
     } catch (error) {
       console.log(error);
     }

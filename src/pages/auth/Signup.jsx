@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRegisterUserMutation } from "../../app/services/auth.service";
 import Spinner from "../../components/atoms/Spinner";
 
@@ -12,7 +12,7 @@ export default function Signup() {
   });
 
   const [register, { isLoading }] = useRegisterUserMutation("auth-register");
-
+  const navigate = useNavigate();
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -20,7 +20,9 @@ export default function Signup() {
     e.preventDefault();
     try {
       const res = await register({ ...form, repeatPassword: undefined });
-      console.log(res);
+      if (res.data) {
+        navigate("/login");
+      }
     } catch (error) {
       console.log(error);
     }
