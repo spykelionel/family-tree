@@ -1,7 +1,10 @@
 import { ModalWrapper } from "@components";
 import { SuccessSvg } from "@components/atoms";
-import React, { useState } from "react";
-import { useCreateMemberMutation } from "../../../app/services/admin.service";
+import React, { useEffect, useState } from "react";
+import {
+  useCreateMemberMutation,
+  useGetStatisticsQuery,
+} from "../../../app/services/admin.service";
 import Button from "../../../components/atoms/Button";
 import Spinner from "../../../components/atoms/Spinner";
 import MemberTable from "./MemberTable";
@@ -36,7 +39,29 @@ function Members() {
       console.log(error);
     }
   };
+  const { data, status } = useGetStatisticsQuery("stats");
 
+  const [stats, setStats] = useState({
+    totalMembers: 0,
+    fathersCount: 0,
+    mothersCount: 0,
+  });
+  useEffect(() => {
+    (() => {
+      switch (status) {
+        case "fulfilled":
+          setStats({
+            totalMembers: data.stats.totalMembers,
+            fathersCount: data.stats.fathersCount,
+            mothersCount: data.stats.mothersCount,
+          });
+          break;
+
+        default:
+          break;
+      }
+    })();
+  }, [status]);
   return (
     <div>
       <p className="font-bold text-xl my-2">
@@ -45,7 +70,9 @@ function Members() {
       </p>
       <div className="flex my-5">
         <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow ">
-          <p className="mb-3 font-normal text-gray-700 ">50 members</p>
+          <p className="mb-3 font-normal text-gray-700 text-center">
+            {stats.totalMembers} members
+          </p>
           <button
             onClick={() => setOpenMemberModal(true)}
             className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-800  "
