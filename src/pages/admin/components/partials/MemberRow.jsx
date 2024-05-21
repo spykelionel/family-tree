@@ -59,7 +59,7 @@ export function MemberRow({
       <td className="px-6 py-2">{email ?? "none"}</td>
       <td className="px-6 py-2 text-nowrap">{dateOfBirth ?? "None"}</td>
       <td
-        className={`px-0 cursor-pointer text-center text-white py-0 rounded-md`}
+        className={`px-0 cursor-pointer text-center text-gray-900 py-0 rounded-md`}
       >
         {placeOfResidence ?? "None"}
       </td>
