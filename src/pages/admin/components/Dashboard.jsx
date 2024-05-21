@@ -1,5 +1,5 @@
 import { Header } from "@pages/admin/components/partials";
-import { Spinner } from "@components/Spinner";
+import { Spinner } from "@components/atoms";
 import { useEffect } from "react";
 import { MemberTable } from ".";
 import { useGetStatisticsQuery } from "../../../app/services/admin.service";
@@ -11,7 +11,7 @@ function Dashboard() {
   const navigate = useNavigate();
 
   const [stats, setStats] = useState({
-    totalMembers: 6,
+    totalMembers: 0,
     fathersCount: 0,
     mothersCount: 0,
   });
