@@ -1,10 +1,11 @@
 import { ModalWrapper } from "@components";
-import { Button, Spinner } from "@components/atoms";
-import { useState } from "react";
+import { Button, Spinner, SuccessSvg } from "@components/atoms";
+import { useEffect, useState } from "react";
 import { useUpdateMemberMutation } from "../../../../app/services/admin.service";
 
 export function MemberRow({
   idx,
+  _id,
   name,
   email,
   dateOfBirth,
@@ -12,6 +13,7 @@ export function MemberRow({
   phoneNumber,
   father,
   mother,
+  members,
 }) {
   const init = {
     name,
@@ -32,16 +34,19 @@ export function MemberRow({
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    console.log(form);
     try {
-      const res = await updateMember(form).unwrap();
+      const res = await updateMember({ body: form, id: _id }).unwrap();
+      console.log(res);
       if (res) {
         setOpenSuccessModal(true);
       }
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => console.log(members), []);
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -176,7 +181,48 @@ export function MemberRow({
                   required
                 />
               </div>
-
+              <div className="mb-5">
+                <label
+                  for="mother"
+                  class="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Select Mother
+                </label>
+                <select
+                  value={form.mother}
+                  id="mother"
+                  name="mother"
+                  class="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
+                  onChange={handleChange}
+                >
+                  {members.map((member) => (
+                    <option key={member?._id} value={member?._id}>
+                      {member?.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="mb-5">
+                <label
+                  for="father"
+                  class="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Select Father
+                </label>
+                <select
+                  value={form.mother}
+                  id="father"
+                  name="father"
+                  class="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
+                  onChange={handleChange}
+                >
+                  {members.map((member) => (
+                    <option key={member?._id} value={member?._id}>
+                      {member?.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <div className="w-full">
                 {isLoading ? (
                   <Spinner />

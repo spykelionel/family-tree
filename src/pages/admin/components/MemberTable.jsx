@@ -3,34 +3,6 @@ import { useGetAllMembersQuery } from "../../../app/services/admin.service";
 import { MemberRow } from "./partials";
 
 function MemberTable() {
-  const PRIORITY = ["LOW", "MEDIUM", "HIGH"];
-  const crimes = [
-    {
-      crimeId: "1542dsaf4",
-      category: "Phishing",
-      location: "Bamenda I",
-      platform: "Fb",
-      priority: "Low",
-      status: "Active",
-    },
-    {
-      crimeId: "154alo3saf4",
-      category: "Phishing",
-      location: "Bamenda II",
-      platform: "Fb",
-      priority: "Medium",
-      status: "Pending",
-    },
-    {
-      crimeId: "o3df",
-      category: "Phishing",
-      location: "Bamenda IIsI",
-      platform: "Fb",
-      priority: "High",
-      status: "Resolved",
-    },
-  ];
-
   const { data, status, isLoading } = useGetAllMembersQuery("members");
 
   useEffect(() => {
@@ -73,7 +45,12 @@ function MemberTable() {
       <tbody>
         {data &&
           data?.members?.map((member, idx) => (
-            <MemberRow key={member._id} idx={idx + 1} {...member} />
+            <MemberRow
+              key={member._id}
+              idx={idx + 1}
+              {...member}
+              members={data?.members}
+            />
           ))}
       </tbody>
     </table>

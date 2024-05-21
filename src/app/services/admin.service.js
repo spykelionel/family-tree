@@ -30,7 +30,7 @@ export const adminApi = createApi({
       query: () => ({ url: `stats`, method: "GET" }),
     }),
     updateMember: builder.mutation({
-      query: (id) => ({ url: `update/${id}`, method: "PUT" }),
+      query: ({ id, body }) => ({ url: `update/${id}`, method: "PUT", body }),
     }),
   }),
 });
