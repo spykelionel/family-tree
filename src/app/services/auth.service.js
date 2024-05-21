@@ -22,7 +22,7 @@ export const authApi = createApi({
       query: (body) => FormWizard.post("/login", body),
     }),
     registerUser: builder.mutation({
-      query: (body) => FormWizard.post("/register", body),
+      query: (body) => FormWizard.post("/create", body),
     }),
     resetPassword: builder.mutation({
       query: (body) => FormWizard.post("/reset-password", body),
