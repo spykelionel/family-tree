@@ -14,7 +14,7 @@ export function MemberRow({
       <td className="px-6 py-2">{name ?? "None"}</td>
 
       <td className="px-6 py-2">{email ?? "none"}</td>
-      <td className="px-6 py-2">{dateOfBirth ?? "None"}</td>
+      <td className="px-6 py-2 w-fit">{dateOfBirth ?? "None"}</td>
       <td
         className={`px-0 cursor-pointer text-center text-white py-0 rounded-md`}
       >

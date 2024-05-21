@@ -1,4 +1,5 @@
 import { Header } from "@pages/admin/components/partials";
+import { Spinner } from "@components/Spinner";
 import { useEffect } from "react";
 import { MemberTable } from ".";
 import { useGetStatisticsQuery } from "../../../app/services/admin.service";
@@ -8,34 +9,7 @@ import { useNavigate } from "react-router-dom";
 function Dashboard() {
   const { data, isLoading, status } = useGetStatisticsQuery("stats");
   const navigate = useNavigate();
-  const time = {
-    name: "time",
-    options: ["Last week", "Today"],
-  };
-  const location = {
-    name: "location",
-    options: ["Bamenda", "Yaounde", "Buea"],
-  };
-  const category = {
-    name: "category",
-    options: ["Scam", "Fraud", "Fake News"],
-  };
-  const state = {
-    options: {
-      chart: {
-        id: "basic-bar",
-      },
-      xaxis: {
-        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
-      },
-    },
-    series: [
-      {
-        name: "series-1",
-        data: [30, 40, 45, 50, 49, 60, 70, 91],
-      },
-    ],
-  };
+
   const [stats, setStats] = useState({
     totalMembers: 6,
     fathersCount: 0,
@@ -63,15 +37,19 @@ function Dashboard() {
       <Header />
       <div className="my-2">
         <div className="flex flex-col sm:flex-row justify-between my-2">
-          <div className="flex flex-wrap flex-row gap-2">
-            <MemberCard
-              count={stats.totalMembers}
-              title="Total Members"
-              onClick={() => navigate("/admin/members")}
-            />
-            <MemberCard count={stats.fathersCount} title="Total Fathers" />
-            <MemberCard count={stats.mothersCount} title="Total Mothers" />
-          </div>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <div className="flex flex-wrap flex-row gap-2">
+              <MemberCard
+                count={stats.totalMembers}
+                title="Total Members"
+                onClick={() => navigate("/admin/members")}
+              />
+              <MemberCard count={stats.fathersCount} title="Total Fathers" />
+              <MemberCard count={stats.mothersCount} title="Total Mothers" />
+            </div>
+          )}
         </div>
 
         <div className="flex flex-row gap-2">
