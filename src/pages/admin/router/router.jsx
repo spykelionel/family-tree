@@ -8,7 +8,7 @@ export const adminRoutes = [
   },
   {
     element: <>View Crimes</>,
-    path: "/admin/crimes",
+    path: "/admin/members",
     errorElement: <>This path doesn't exist yet.</>,
   },
 ];

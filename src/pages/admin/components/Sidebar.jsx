@@ -3,7 +3,6 @@ import { HomeRounded, Logout, People } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import useUser from "../../../hooks/useUser";
 
 const Menu = (props) => {
   const { children, items } = props;
@@ -90,11 +89,9 @@ const Sidebar = () => {
     },
   ];
 
-  const user = useUser();
-
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full h-full border-r bg-blue-500 text-white space-y-8 sm:w-48 rounded-tr-2xl">
+      <nav className="fixed top-0 left-0 w-0 h-full border-r bg-blue-500 text-white space-y-8 sm:w-48 rounded-tr-2xl">
         <div className="flex flex-col h-full my-2">
           <div className="h-20 flex flex-row justify-center items-center px-0">
             <Link to={"/admin"}>
@@ -134,7 +131,7 @@ const Sidebar = () => {
                   <Avatar {...stringAvatar("Alivika tony")} />
                   <div className="flex flex-col items-center">
                     <span className="block text-white text-sm font-semibold">
-                      {user.user.email}
+                      spyke#@mail.con
                     </span>
                     <a
                       href="javascript:void(0)"
