@@ -1,4 +1,4 @@
-import { Dashboard } from "@pages/admin/components";
+import { Dashboard, Members } from "@pages/admin/components";
 
 export const adminRoutes = [
   {
@@ -7,7 +7,7 @@ export const adminRoutes = [
     errorElement: <>This path doesn't exist yet.</>,
   },
   {
-    element: <>View Crimes</>,
+    element: <Members />,
     path: "/admin/members",
     errorElement: <>This path doesn't exist yet.</>,
   },

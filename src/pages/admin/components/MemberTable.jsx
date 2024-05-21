@@ -1,6 +1,8 @@
-import { CrimeReportRow } from "@pages/admin/components/partials";
+import { useEffect } from "react";
+import { useGetAllMembersQuery } from "../../../app/services/admin.service";
+import { MemberRow } from "./partials";
 
-function CrimeReportTable() {
+function MemberTable() {
   const PRIORITY = ["LOW", "MEDIUM", "HIGH"];
   const crimes = [
     {
@@ -28,6 +30,13 @@ function CrimeReportTable() {
       status: "Resolved",
     },
   ];
+
+  const { data, status, isLoading } = useGetAllMembersQuery("members");
+
+  useEffect(() => {
+    console.log(data);
+  }, [status]);
+
   return (
     <table className="w-full text-sm text-left text-gray-500 ">
       <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
@@ -36,22 +45,25 @@ function CrimeReportTable() {
             SN
           </th>
           <th scope="col" className="px-6 py-3">
-            Crime ID
+            Name
           </th>
           <th scope="col" className="px-6 py-3">
-            Category
+            Email
           </th>
           <th scope="col" className="px-6 py-3">
-            Location
+            Date of Birth
           </th>
           <th scope="col" className="px-6 py-3">
-            Platform
+            Place Of Residence
           </th>
           <th scope="col" className="px-6 py-3">
-            Priority
+            Phone
           </th>
           <th scope="col" className="px-6 py-3">
-            Status
+            Mother
+          </th>
+          <th scope="col" className="px-6 py-3">
+            Father
           </th>
           <th scope="col" className="px-6 py-3">
             <span className="sr-only">Edit</span>
@@ -60,11 +72,11 @@ function CrimeReportTable() {
       </thead>
       <tbody>
         {crimes.map((crime, idx) => (
-          <CrimeReportRow key={crime.crimeId} idx={idx + 1} {...crime} />
+          <MemberRow key={crime.crimeId} idx={idx + 1} {...crime} />
         ))}
       </tbody>
     </table>
   );
 }
 
-export default CrimeReportTable;
+export default MemberTable;

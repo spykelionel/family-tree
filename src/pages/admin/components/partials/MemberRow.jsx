@@ -1,4 +1,4 @@
-export function CrimeReportRow({
+export function MemberRow({
   idx,
   crimeId,
   category,
@@ -8,7 +8,7 @@ export function CrimeReportRow({
   status,
 }) {
   return (
-    <tr className="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 ">
+    <tr className="bg-white border-b  hover:bg-gray-50 ">
       <td className="px-6 py-2">{idx}</td>
       <td className="px-6 py-2">{crimeId}</td>
       <th

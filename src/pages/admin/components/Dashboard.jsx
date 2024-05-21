@@ -2,8 +2,9 @@ import report_active from "@assets/images/report_active.svg";
 import report_new from "@assets/images/report_new.svg";
 import report_resolved from "@assets/images/report_resolved.svg";
 import report_total from "@assets/images/report_total.svg";
-import { CrimeReportTable, ReportCard } from "@pages/admin/components";
+import { ReportCard } from "@pages/admin/components";
 import { Header } from "@pages/admin/components/partials";
+import { MemberTable } from ".";
 
 function Dashboard() {
   const time = {
@@ -63,7 +64,7 @@ function Dashboard() {
           <div className="flex my-2 flex-col gap-2 overflow-x-auto border rounded-md p-2">
             <p className="p-0 font-bold text-gray-800">Crime Report Table</p>
             {/* add data prop and pagination component. Data should come from crime-store */}
-            <CrimeReportTable />
+            <MemberTable />
           </div>
         </div>
       </div>
