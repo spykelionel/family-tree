@@ -210,7 +210,7 @@ export function MemberRow({
                   Select Father
                 </label>
                 <select
-                  value={form.mother}
+                  value={form.father}
                   id="father"
                   name="father"
                   class="border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "

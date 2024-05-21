@@ -1,10 +1,11 @@
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+
 const Spinner = ({ ...props }) => {
   return (
-    <div className="text-center mt-1" {...props}>
-      <div className="spinner-border text-warning" role="status">
-        {/* <span className="sr-only">Loading...</span> */}
-      </div>
-    </div>
+    <Box sx={{ display: "flex" }}>
+      <CircularProgress />
+    </Box>
   );
 };
 
