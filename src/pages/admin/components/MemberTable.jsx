@@ -1,3 +1,4 @@
+import { Spinner } from "@components/atoms";
 import { useEffect } from "react";
 import { useGetAllMembersQuery } from "../../../app/services/admin.service";
 import { MemberRow } from "./partials";
@@ -43,7 +44,7 @@ function MemberTable() {
         </tr>
       </thead>
       <tbody>
-        {data &&
+        {data ? (
           data?.members?.map((member, idx) => (
             <MemberRow
               key={member._id}
@@ -51,7 +52,10 @@ function MemberTable() {
               {...member}
               members={data?.members}
             />
-          ))}
+          ))
+        ) : (
+          <Spinner />
+        )}
       </tbody>
     </table>
   );
