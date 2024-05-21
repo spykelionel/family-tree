@@ -3,7 +3,7 @@ import { HomeRounded, Logout, People } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../../features/auth/authSlice";
 
 const Menu = (props) => {
@@ -57,6 +57,7 @@ const Menu = (props) => {
 const Sidebar = () => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const navsFooter = [
     {
@@ -96,14 +97,14 @@ const Sidebar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-0 h-full border-r bg-blue-500 text-white space-y-8 sm:w-48 rounded-tr-2xl">
+      <nav className="fixed top-0 left-0 w-0 h-full border-r bg-blue-500 text-white space-y-8 sm:w-40 rounded-tr-2xl text-center">
         <div className="flex flex-col h-full my-2">
           <div className="h-20 flex flex-row justify-center items-center px-0">
             <Link to={"/admin"}>
               <People />
             </Link>
           </div>
-          <div className="flex-1 flex flex-col w-full items-start ml-4 h-full overflow-auto">
+          <div className="flex-1 flex flex-col w-full items-start h-full overflow-auto">
             <ul className="px-0 text-sm font-medium flex-1 w-full">
               {nav.map(({ name, icon, items }) => (
                 <li className="w-full bg-white my-2 rounded-md ">
@@ -132,7 +133,7 @@ const Sidebar = () => {
               </ul>
               <hr className="w-full" />
               <div className="py-4 px-0">
-                <div className="flex flex-col gap-2 items-center gap-x-4">
+                <div className="flex flex-col gap-2 justify-center   items-center gap-x-4">
                   <Avatar {...stringAvatar("Alivika tony")} />
                   <div className="flex flex-col items-center">
                     <span className="block text-white text-sm font-semibold">
@@ -147,7 +148,14 @@ const Sidebar = () => {
                   </div>
                   <div className="flex flex-row gap-2 my-2 cursor-pointer hover:text-gray-200">
                     <Logout />
-                    <button onClick={() => dispatch(logout())}>Logout</button>
+                    <button
+                      onClick={() => {
+                        navigate("/");
+                        dispatch(logout());
+                      }}
+                    >
+                      Logout
+                    </button>
                   </div>
                 </div>
               </div>
