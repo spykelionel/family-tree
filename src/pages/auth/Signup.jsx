@@ -106,7 +106,7 @@ export default function Signup() {
           />
         </div>
         {form.password !== form.repeatPassword && (
-          <code className="py-2 text-red-400">Password do not match</code>
+          <code className="py-2 text-red-400">Passwords do not match</code>
         )}
 
         <div className="w-full">
